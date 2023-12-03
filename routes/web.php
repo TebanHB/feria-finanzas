@@ -43,3 +43,5 @@ Route::post('/admin/register', [App\Http\Controllers\Auth\RegisterController::cl
 Route::post('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::resource('productos', ProductoController::class)->middleware('auth')->names('admin.productos');
+Route::get('/productos/recargarstock/{id}', [ProductoController::class, 'recargarStock'])->middleware('auth');
+Route::post('/recargarStock', [ProductoController::class, 'cargar'])->middleware('auth');

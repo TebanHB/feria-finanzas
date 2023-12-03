@@ -39,7 +39,17 @@ class ProductoController extends Controller
 
         return redirect()->route('admin.productos.index');
     }
-
+    public function recargarStock($id)
+    {
+        $producto = Producto::find($id);
+        return view('productos.recargarStock', ['producto' => $producto]);
+    }
+    public function cargar(Request $request){
+        $producto = Producto::find($request->id);
+        $producto->stock += $request->cantidad;
+        $producto->save();
+        return redirect()->action([ProductoController::class, 'index']);
+    }
     public function show(Producto $producto)
     {
         return view('productos.show', compact('producto'));

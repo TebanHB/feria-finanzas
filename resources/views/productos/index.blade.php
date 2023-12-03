@@ -6,7 +6,7 @@
     <section class="contenido">
         <div class="mostrador" id="mostrador">
             <div class="fila">
-            @foreach ($productos as $producto)
+                @foreach ($productos as $producto)
                     <div class="item" onclick="cargar(this)">
                         <div class="contenedor-foto">
                             <img src="{{ asset('storage/imagenes/' . $producto->imagen) }}" alt="">
@@ -14,10 +14,11 @@
                         <p class="descripcion">{{ $producto->nombre }}</p>
                         <input type="hidden" id="precio_minimo" value="{{ $producto->precio_minimo }}">
                         <input type="hidden" id="stock" value="{{ $producto->stock }}">
+                        <input type="hidden" id="id_producto" value="{{ $producto->id }}">
                         <span class="precio">Bs {{ $producto->precio_estandar }}</span>
                     </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
         </div>
         <!-- CONTENEDOR DEL ITEM SELECCIONADO -->
         <div class="seleccion" id="seleccion">
@@ -29,6 +30,14 @@
                 <h2 id="modelo">NIKE MODEL 1</h2>
                 <p id="precio-minimo-mostrado"></p>
                 <p id="stock-mostrado"></p>
+                <input type="hidden" id="id" name="id">
+                <button id="recargarStock" name="recargarStock" onclick="recargarStock()">Recargar Stock</button>
+                <script>
+                    function recargarStock() {
+                        var id = document.getElementById('id').value;
+                        window.location.href = '/productos/recargarstock/' + id;
+                    }
+                </script>
                 <span class="precio" id="precio">$ 130</span>
 
                 <div class="fila">
