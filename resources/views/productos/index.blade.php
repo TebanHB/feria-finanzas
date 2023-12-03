@@ -3,13 +3,17 @@
     <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 @endpush
 @section('content')
+    @foreach ($productos as $producto)
+        <br>
+        {{ $producto->imagen }}
+    @endforeach
     <section class="contenido">
         <div class="mostrador" id="mostrador">
             <div class="fila">
                 @foreach ($productos as $producto)
                     <div class="item" onclick="cargar(this)">
                         <div class="contenedor-foto">
-                            <img src="{{ asset($producto->imagen) }}" alt="">
+                            <img src="{{ asset('storage/imagenes/' . $producto->imagen) }}" alt="">
                         </div>
                         <p class="descripcion">{{ $producto->nombre }}</p>
                         <input type="hidden" id="precio_minimo" value="{{ $producto->precio_minimo }}">

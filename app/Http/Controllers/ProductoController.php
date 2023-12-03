@@ -23,10 +23,19 @@ class ProductoController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('public/imagenes');
+            $file = $request->file('imagen');
+            $nombreImagen = $file->getClientOriginalName();
+            $file->storeAs('public/imagenes', $nombreImagen);
+            $data['imagen'] = $nombreImagen;
         }
 
-        $producto = Producto::create($data);
+        $producto = new Producto;
+        $producto->nombre = $request->nombre;
+        $producto->precio_estandar = $request->precio_estandar;
+        $producto->precio_minimo = $request->precio_minimo;
+        $producto->stock = $request->stock;
+        $producto->imagen = $data['imagen'];
+        $producto->save();
 
         return redirect()->route('admin.productos.index');
     }
