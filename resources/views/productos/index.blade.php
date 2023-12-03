@@ -3,14 +3,10 @@
     <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 @endpush
 @section('content')
-    @foreach ($productos as $producto)
-        <br>
-        {{ $producto->imagen }}
-    @endforeach
     <section class="contenido">
         <div class="mostrador" id="mostrador">
             <div class="fila">
-                @foreach ($productos as $producto)
+            @foreach ($productos as $producto)
                     <div class="item" onclick="cargar(this)">
                         <div class="contenedor-foto">
                             <img src="{{ asset('storage/imagenes/' . $producto->imagen) }}" alt="">
@@ -20,8 +16,8 @@
                         <input type="hidden" id="stock" value="{{ $producto->stock }}">
                         <span class="precio">Bs {{ $producto->precio_estandar }}</span>
                     </div>
-                @endforeach
-            </div>
+            @endforeach
+        </div>
         </div>
         <!-- CONTENEDOR DEL ITEM SELECCIONADO -->
         <div class="seleccion" id="seleccion">

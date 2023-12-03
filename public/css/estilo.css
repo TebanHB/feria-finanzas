@@ -5,6 +5,12 @@
     box-sizing: border-box;
     font-family: 'Open Sans';
 }
+@media (max-width: 768px) {
+    .mostrador .fila .item {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
 .contenido{
     max-width: 1200px;
     width: 100%;
@@ -17,11 +23,12 @@
 }
 .mostrador .fila{
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
     justify-content: space-between;
     margin-bottom: 40px;
 }
-
 .mostrador .fila .item{
     max-width: 210px;
     padding: 30px;
@@ -67,7 +74,6 @@
     right: 20px;
     cursor: pointer;
 }
-
 .info{
     padding: 20px;
 }

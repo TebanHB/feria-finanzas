@@ -26,36 +26,9 @@ class DatabaseSeeder extends Seeder
             'precio_estandar' => 8,
             'precio_minimo' => 7,
             'stock' => 1000,
-            'imagen' => 'storage/imagenes/LechePil.jpg',
+            'imagen' => 'LechePil.jpg',
         ]);
-        Producto::create([
-            'nombre' => 'Leche Pil ',
-            'precio_estandar' => 8,
-            'precio_minimo' => 7,
-            'stock' => 1000,
-            'imagen' => 'storage/imagenes/LechePil.jpg',
-        ]);
-        Producto::create([
-            'nombre' => 'Leche Pil ',
-            'precio_estandar' => 8,
-            'precio_minimo' => 7,
-            'stock' => 1000,
-            'imagen' => 'storage/imagenes/LechePil.jpg',
-        ]);
-        Producto::create([
-            'nombre' => 'Leche Pil ',
-            'precio_estandar' => 8,
-            'precio_minimo' => 7,
-            'stock' => 1000,
-            'imagen' => 'storage/imagenes/LechePil.jpg',
-        ]);
-        Producto::create([
-            'nombre' => 'Leche Pil ',
-            'precio_estandar' => 8,
-            'precio_minimo' => 7,
-            'stock' => 1000,
-            'imagen' => 'storage/imagenes/LechePil.jpg',
-        ]);
+        
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
