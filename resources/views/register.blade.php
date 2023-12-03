@@ -8,18 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{asset('qrcode-solid.svg')}}">
+    <link rel="icon" href="{{ asset('qrcode-solid.svg') }}">
 
     <title>PymeSecureQR - Register</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{asset('libs/sbadmin/fontawesome/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('libs/sbadmin/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('libs/sbadmin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('libs/sbadmin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -37,35 +37,47 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div>
+                            <form class="user" method="POST" action="{{ route('register') }}">
+                                @csrf <div class="form-group row">
+                                    <input id="name" type="text" placeholder="Full Name"
+                                        class="form-control form-control-user @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" required autocomplete="name"
+                                        autofocus>
+
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input id="email" type="email"
+                                        placeholder="Email Address" class="form-control form-control-user @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input id="password" type="password" placeholder="Password" class="form-control form-control-user  @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <input id="password-confirm" type="password" placeholder="Repeat Password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    {{ __('Register') }}
+                                </button>
                             </form>
                             <hr>
                             <div class="text-center">
@@ -83,10 +95,10 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('libs/sbadmin/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('libs/sbadmin/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('libs/sbadmin/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('libs/sbadmin/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('libs/sbadmin/js/sb-admin-2.min.js')}}"></script>
+    <script src="{{ asset('libs/sbadmin/js/sb-admin-2.min.js') }}"></script>
 
 </body>
 
