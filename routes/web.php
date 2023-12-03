@@ -25,3 +25,7 @@ Route::get('/admin/login', function() {
 Route::get('/admin/register', function() {
     return view('register');
 });
+Route::post('/git-pull', function () {
+    exec('git pull', $output, $return_var);
+    return ['success' => $return_var === 0, 'output' => $output];
+});
