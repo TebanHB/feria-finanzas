@@ -21,17 +21,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'blumbergesteban@gmail.com',
             'password' => bcrypt('1234'), // Asegúrate de encriptar la contraseña
         ]);
-        Producto::create([
-            'nombre' => 'Leche Pil ',
-            'precio_estandar' => 8,
-            'precio_minimo' => 7,
-            'stock' => 1000,
-            'imagen' => 'LechePil.jpg',
-        ]);
-        
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

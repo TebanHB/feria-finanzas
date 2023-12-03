@@ -27,7 +27,6 @@
             <div class="info">
                 <img src="img/1.png" alt="" id="img">
                 <h2 id="modelo">NIKE MODEL 1</h2>
-                <p id="descripcion">SEXO</p>
                 <p id="precio-minimo-mostrado"></p>
                 <p id="stock-mostrado"></p>
                 <span class="precio" id="precio">$ 130</span>
