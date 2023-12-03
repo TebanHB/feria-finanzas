@@ -42,4 +42,4 @@ Route::get('/admin/register', [App\Http\Controllers\Auth\RegisterController::cla
 Route::post('/admin/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 Route::post('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::resource('productos', ProductoController::class)->names('admin.productos');
+Route::resource('productos', ProductoController::class)->middleware('auth')->names('admin.productos');
