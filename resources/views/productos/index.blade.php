@@ -7,14 +7,11 @@
         <div class="mostrador" id="mostrador">
             <div class="fila">
                 @foreach ($productos as $producto)
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this,{{$producto}})">
                         <div class="contenedor-foto">
                             <img src="{{ asset('storage/imagenes/' . $producto->imagen) }}" alt="">
                         </div>
                         <p class="descripcion">{{ $producto->nombre }}</p>
-                        <input type="hidden" id="precio_minimo" value="{{ $producto->precio_minimo }}">
-                        <input type="hidden" id="stock" value="{{ $producto->stock }}">
-                        <input type="hidden" id="id_producto" value="{{ $producto->id }}">
                         <span class="precio">Bs {{ $producto->precio_estandar }}</span>
                     </div>
                 @endforeach
@@ -28,13 +25,13 @@
             <div class="info">
                 <img src="img/1.png" alt="" id="img">
                 <h2 id="modelo">NIKE MODEL 1</h2>
-                <p id="precio-minimo-mostrado"></p>
-                <p id="stock-mostrado"></p>
-                <input type="hidden" id="id" name="id">
+                <span class="precio_minimo" id="precio_minimo">SEXO</span>
+                <span class="stock" id="stock">SEXO</span>
+                <span class="id" id="id">SEXO</span>
                 <button id="recargarStock" name="recargarStock" onclick="recargarStock()">Recargar Stock</button>
                 <script>
                     function recargarStock() {
-                        var id = document.getElementById('id').value;
+                        var id = document.getElementById('id').innerText;
                         window.location.href = '/productos/recargarstock/' + id;
                     }
                 </script>

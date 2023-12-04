@@ -6,12 +6,12 @@ let descripSeleccionada = document.getElementById("descripcion");
 let precioSeleccionado = document.getElementById("precio");
 let precioMinimoSeleccionado = document.getElementById("precio_minimo");
 let stockSeleccionado = document.getElementById("stock");
-let idSeleccionado = document.getElementById("id_producto");
-let precioMinimoMostrado = document.getElementById("precio-minimo-mostrado");
-let stockMostrado = document.getElementById("stock-mostrado");
+let precioMinimoMostrado = document.getElementById("precio_minimo");
+let stockMostrado = document.getElementById("stock");
 let idMostrado = document.getElementById("id");
-function cargar(item) {
+function cargar(item,producto) {
     quitarBordes();
+    console.log(producto);
     mostrador.style.width = "60%";
     seleccion.style.width = "40%";
     seleccion.style.opacity = "1";
@@ -19,9 +19,11 @@ function cargar(item) {
     imgSeleccionada.src = item.getElementsByTagName("img")[0].src;
     modeloSeleccionado.innerHTML = item.getElementsByTagName("p")[0].innerHTML;
     precioSeleccionado.innerHTML = item.getElementsByTagName("span")[0].innerHTML;
-    precioMinimoMostrado.textContent = "Precio Minimo: " + precioMinimoSeleccionado.value;
-    stockMostrado.textContent = "Stock: " + stockSeleccionado.value;
-    document.getElementById('id').value = idSeleccionado.value;
+    stockMostrado.innerHTML = "Stock: "+producto.stock;
+    precioMinimoMostrado.innerHTML = "Precio Minimo: "+producto.precio_minimo;
+    idMostrado.innerHTML = producto.id;
+
+    //document.getElementById('id').value = idSeleccionado.value;
 }
 function cerrar() {
     mostrador.style.width = "100%";
@@ -31,6 +33,8 @@ function cerrar() {
 }
 function quitarBordes() {
     var items = document.getElementsByClassName("item");
+
+
     for (i = 0; i < items.length; i++) {
         items[i].style.border = "none";
     }
