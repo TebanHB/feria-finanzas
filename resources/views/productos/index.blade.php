@@ -25,9 +25,9 @@
             <div class="info">
                 <img src="img/1.png" alt="" id="img">
                 <h2 id="modelo">NIKE MODEL 1</h2>
-                <span class="precio_minimo" id="precio_minimo">SEXO</span>
-                <span class="stock" id="stock">SEXO</span>
-                <span class="id" id="id">SEXO</span>
+                <span class="precio_minimo" id="precio_minimo"></span>
+                <span class="stock" id="stock"></span>
+                <span class="id" id="id"></span>
                 <button id="recargarStock" name="recargarStock" onclick="recargarStock()">Recargar Stock</button>
                 <script>
                     function recargarStock() {
