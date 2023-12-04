@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+    public function index2()
+    {
+        $productos = Producto::all();
+        return view('productos.vender', compact('productos'));
+    }
     public function index()
     {
         $productos = Producto::all();
         return view('productos.index', compact('productos'));
     }
-
     public function create()
     {
         return view('productos.create');
