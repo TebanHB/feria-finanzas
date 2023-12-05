@@ -3,11 +3,6 @@
     <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 @endpush
 @section('content')
-@extends('plantillas.app')
-@push('css')
-    <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
-@endpush
-@section('content')
     <section class="contenido">
         <div class="mostrador" id="mostrador">
             <div class="fila">
@@ -75,5 +70,5 @@
             </div>
         </div>
     </section>
-    <script src="{{ asset('js/script2.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 @endsection

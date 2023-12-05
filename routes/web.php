@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\PagosPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 /*
@@ -49,3 +50,8 @@ Route::post('/recargarStock', [ProductoController::class, 'cargar'])->middleware
 Route::get('/escogerProductos', [ProductoController::class, 'index2'])->name('escoger.productos');
 Route::post('/productos/agregarcarrito/{id}/{cantidad}', [CarritoController::class, 'agregarAlCarrito'])->name('carrito.agregar');
 Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.ver');
+Route::get('/cobro/qr', function(){
+    return view('cobros.cobroqr');
+})->name('pago.qr');
+Route::post('/consumirServicio', [PagosPageController::class, 'RecolectarDatos']);
+Route::post('/consultar', [PagosPageController::class, 'ConsultarEstado']);
