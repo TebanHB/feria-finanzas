@@ -62,23 +62,28 @@
                             </div>
                             <div class="form-group col-sm-4 flex-column d-flex">
                                 <label class="form-control-label px-3">Cantidad</label>
-                                <input class="form-control" type="text" name="taPedidoDetalle[0][Cantidad]"
-                                    placeholder="">
+                                <input readonly class="form-control" type="text" name="taPedidoDetalle[0][Cantidad]" value="{{ count(session()->get('carrito', [])) }}" placeholder="">
                             </div>
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-4 flex-column d-flex">
                                 <label class="form-control-label px-3">Precio</label>
-                                <input class="form-control" type="text" name="taPedidoDetalle[0][Precio]" placeholder="">
-                            </div>
+                                @php
+                                    $total = 0;
+                                    $carrito = session()->get('carrito', []);
+                                    foreach ($carrito as $producto) {
+                                        $total += $producto['precio'] * $producto['cantidad'];
+                                    }
+                                @endphp
+                                <input class="form-control" type="text" name="taPedidoDetalle[0][Precio]" value="{{ $total }}" placeholder="" readonly>                            </div>
                             <div class="form-group col-sm-4 flex-column d-flex">
                                 <label class="form-control-label px-3">Descuento</label>
-                                <input class="form-control" type="text" name="taPedidoDetalle[0][Descuento]"
+                                <input readonly value="0" class="form-control" type="text" name="taPedidoDetalle[0][Descuento]"
                                     placeholder="">
                             </div>
                             <div class="form-group col-sm-4 flex-column d-flex">
                                 <label class="form-control-label px-3">Total</label>
-                                <input class="form-control" type="text" name="taPedidoDetalle[0][Total]" placeholder="">
+                                <input value="{{ $total }}" readonly class="form-control" type="text" name="taPedidoDetalle[0][Total]" placeholder="">
                             </div>
                         </div>
                         <div class="row justify-content-end">
