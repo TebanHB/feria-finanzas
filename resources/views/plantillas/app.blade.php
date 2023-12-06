@@ -88,7 +88,7 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Metodo de cobro:</h6>
-                        <a class="collapse-item" href="{{route('pago.qr')}}">QR</a>
+                        <a class="collapse-item" href="{{ route('pago.qr') }}">QR</a>
                         <a class="collapse-item" href="register.html">Efectivo</a>
                     </div>
                 </div>
@@ -178,8 +178,80 @@
                                         </div>
                                     </a>
                                 @endforeach
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Ver todo el
-                                    carrito</a>
+                                <a id="vaciar-carrito" class="dropdown-item text-center small text-gray-500 bg-danger"
+                                    href="#">Vaciar Carrito</a>
+
+                                <script>
+                                    var csrfToken = '{{ csrf_token() }}';
+
+                                    document.getElementById('vaciar-carrito').addEventListener('click', function(event) {
+                                        event.preventDefault();
+
+                                        fetch('/carrito/vaciar', {
+                                                method: 'GET',
+                                                headers: {
+                                                    'X-CSRF-TOKEN': csrfToken,
+                                                    'Content-Type': 'application/json'
+                                                }
+                                            }).then(response => response.json())
+                                            .then(data => {
+                                                console.log(data);
+                                                if (data.success) {
+                                                    alert('Carrito vaciado');
+                                                    // Aquí puedes actualizar la interfaz de usuario para reflejar que el carrito está vacío
+                                                } else {
+                                                    alert('Hubo un error al vaciar el carrito');
+                                                }
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error:', error);
+                                            });
+                                    });
+                                </script>
+                                <a id="vender-carrito"
+                                    class="dropdown-item text-center small text-gray-500 bg-success text-white"
+                                    href="#">Vender Carrito</a>
+                                    <script>
+                                        var csrfToken = '{{ csrf_token() }}';
+
+                                        document.getElementById('vender-carrito').addEventListener('click', function(event) {
+                                            event.preventDefault();
+
+                                            fetch('/carrito/vender', {
+                                                method: 'GET',
+                                                headers: {
+                                                    'X-CSRF-TOKEN': csrfToken,
+                                                    'Content-Type': 'application/json'
+                                                }
+                                            }).then(response => response.json())
+                                            .then(data => {
+                                                console.log(data);
+                                                if (data.success) {
+                                                    alert('Productos vendidos');
+                                                    // Aquí puedes actualizar la interfaz de usuario para reflejar que el carrito está vacío
+                                                } else {
+                                                    alert('Hubo un error al vender los productos');
+                                                }
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error:', error);
+                                            });
+                                        });
+                                    </script>
+                                
+                                @php
+                                    $carrito = session()->get('carrito', []);
+                                    $total = 0;
+
+                                    foreach ($carrito as $producto) {
+                                        $total += $producto['precio'] * $producto['cantidad'];
+                                    }
+                                @endphp
+
+                                <!-- Imprime todo el carrito -->
+                                <a class="dropdown-item text-center small text-gray-500" href="#">
+                                    Total: {{ $total }}
+                                </a>
                             </div>
                         </li>
 

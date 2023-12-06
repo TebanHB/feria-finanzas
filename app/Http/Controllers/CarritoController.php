@@ -7,9 +7,29 @@ use Illuminate\Http\Request;
 
 class CarritoController extends Controller
 {
-    public function mostrarCarrito()
+    public function venderCarrito()
     {
-        // Tu código para mostrar los productos en el carrito aquí
+        try {
+            $carrito = session()->get('carrito', []);
+
+            foreach ($carrito as $producto) {
+                $productoEnBase = Producto::find($producto['id']);
+                if (!$productoEnBase) {
+                    return response()->json(['success' => false, 'message' => 'Producto no encontrado'], 404);
+                }
+                $productoEnBase->stock -= $producto['cantidad'];
+                $productoEnBase->save();
+            }
+
+            session()->forget('carrito');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Productos vendidos'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 
     public function agregarAlCarrito($id, $cantidad)
@@ -22,9 +42,10 @@ class CarritoController extends Controller
             $carrito[$id]['cantidad'] += $cantidad;
         } else {
             $carrito[$id] = [
+                'id' => $producto->id,
                 'nombre' => $producto->nombre,
                 'cantidad' => $cantidad,
-                'precio' => $producto->precio
+                'precio' => $producto->precio_estandar
             ];
         }
 
@@ -35,6 +56,15 @@ class CarritoController extends Controller
             'message' => 'Producto agregado al carrito'
         ]);
     }
+    public function vaciarCarrito()
+{
+    session()->forget('carrito');
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Carrito vaciado'
+    ]);
+}
     public function verCarrito()
     {
         $carrito = session()->get('carrito', []);

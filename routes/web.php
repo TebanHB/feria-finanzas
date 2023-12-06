@@ -47,11 +47,13 @@ Route::get('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, '
 Route::resource('productos', ProductoController::class)->middleware('auth')->names('admin.productos');
 Route::get('/productos/recargarstock/{id}', [ProductoController::class, 'recargarStock'])->middleware('auth');
 Route::post('/recargarStock', [ProductoController::class, 'cargar'])->middleware('auth');
-Route::get('/escogerProductos', [ProductoController::class, 'index2'])->name('escoger.productos');
-Route::post('/productos/agregarcarrito/{id}/{cantidad}', [CarritoController::class, 'agregarAlCarrito'])->name('carrito.agregar');
-Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.ver');
+Route::get('/escogerProductos', [ProductoController::class, 'index2'])->middleware('auth')->name('escoger.productos');
+Route::post('/productos/agregarcarrito/{id}/{cantidad}', [CarritoController::class, 'agregarAlCarrito'])->middleware('auth')->name('carrito.agregar');
+Route::get('/carrito', [CarritoController::class, 'verCarrito'])->middleware('auth')->name('carrito.ver');
 Route::get('/cobro/qr', function(){
     return view('cobros.cobroqr');
-})->name('pago.qr');
-Route::post('/consumirServicio', [PagosPageController::class, 'RecolectarDatos']);
-Route::post('/consultar', [PagosPageController::class, 'ConsultarEstado']);
+})->middleware('auth')->name('pago.qr');
+Route::post('/consumirServicio', [PagosPageController::class, 'RecolectarDatos'])->middleware('auth');
+Route::post('/consultar', [PagosPageController::class, 'ConsultarEstado'])->middleware('auth');
+Route::get('/carrito/vaciar', [CarritoController::class, 'vaciarCarrito'])->middleware('auth')->name('carrito.vaciar');
+Route::get('/carrito/vender', [CarritoController::class, 'venderCarrito'])->middleware('auth')->name('carrito.vender');
