@@ -52,7 +52,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Productosssssssssss
+                Productos
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
